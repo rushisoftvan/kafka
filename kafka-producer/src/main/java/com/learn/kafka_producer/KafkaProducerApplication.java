@@ -20,7 +20,7 @@ public class KafkaProducerApplication {
 		return args -> {
 
 			for(int i=0; i<10000; i++){
-				kafkaTemplate.send("test", "hello kafka" + i);
+				kafkaTemplate.send("rushi", "hello kafka" + i);
 			}
 		};
 	}
