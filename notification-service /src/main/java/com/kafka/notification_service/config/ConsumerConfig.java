@@ -1,0 +1,43 @@
+package com.kafka.notification_service.config;
+
+import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Configuration
+public class ConsumerConfig {
+
+    @Value("${spring.kafka.bootstrap-server}")
+    private String bootstrapServer;
+
+
+    public Map<String, Object> consumerConfig(){
+        HashMap<String, Object> props = new HashMap<>();
+        props.put(org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServer);
+        props.put(org.apache.kafka.clients.consumer.ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_DOC,StringSerializer.class);
+        return props;
+    }
+
+    @Bean
+    public ConsumerFactory<String, String> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<String, String>(consumerConfig());
+    }
+
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String> ka() {
+
+        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        return factory;
+    }
+}
