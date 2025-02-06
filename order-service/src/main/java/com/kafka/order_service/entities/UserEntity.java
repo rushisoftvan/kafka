@@ -16,12 +16,9 @@ import java.time.LocalDateTime;
 @Table(name="users")
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity {
+public class UserEntity extends BaseEntity {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -45,30 +42,25 @@ public class UserEntity {
     @Column(name = "account_non_locked", nullable = false)
     private Boolean accountNonLocked;
 
-    @Column(name = "created_date", nullable = false)
-    private Instant createdDate;
+//    @Column(name = "created_date", nullable = false)
+//    private Instant createdDate;
+//
+//    @Column(name = "updated_date", nullable = false)
+//    private Instant updatedDate;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="created_by")
+//    private UserEntity createdBy;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="updated_by")
+//    private UserEntity updatedBy;
 
-    @Column(name = "updated_date", nullable = false)
-    private Instant updatedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="created_by")
-    private UserEntity createdBy;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="updated_by")
-    private UserEntity updatedBy;
-
-    @PrePersist
-public void  prepersist(){
-    this.createdDate = Instant.now();
-    this.updatedDate = Instant.now();
-    this.createdBy = new UserEntity(1L);
-}
 
 public UserEntity (Long id)
 {
-    this.id = id;
+    super(id);
 }
 
 }

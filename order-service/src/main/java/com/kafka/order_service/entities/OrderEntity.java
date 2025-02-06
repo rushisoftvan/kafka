@@ -1,5 +1,7 @@
 package com.kafka.order_service.entities;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
+import com.kafka.order_service.enums.OrderStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,26 +16,21 @@ import java.math.BigDecimal;
 @Table(name = "orders")
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderEntity {
+public class OrderEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name =  "order_id")
-    String orderId;
+   private String orderId;
 
     @Column(name="product_name")
-    String productName;
+   private  String productName;
 
     @Column(name="price")
-    BigDecimal price;
+  private  BigDecimal price;
 
     @Column(name="email")
-    String email;
+  private  String email;
 
     @Column(name="order_status")
-    String OrderStatus;
-
-
+    OrderStatusEnum OrderStatus;
 }
