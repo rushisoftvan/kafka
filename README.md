@@ -157,7 +157,32 @@ The system attempts to process the message.
 A @DltHandler processes messages in the DLT. This handler could:
 Log the error message.
 Notify an administrator or customer support.
-Try to resolve the issue (like sending an alert about malformed data) or store the failed message for later investigation.   
+Try to resolve the issue (like sending an alert about malformed data) or store the failed message for later investigation. 
+
+**Complete Example Flow**:
+ A message is sent to a topic in a messaging system (e.g., Kafka).
+ The system attempts to process the message.
+  If it fails, it will retry with exponential backoff (e.g., retry after 2 seconds, 4 seconds, etc.).
+  If retries exceed a threshold (say, 3 retries), the message is sent to the Dead Letter Topic.
+
+
+**A @DltHandler processes messages in the DLT. This handler could**:
+Log the error message.
+Notify an administrator or customer support.
+Try to resolve the issue (like sending an alert about malformed data) or store the failed message for later investigation.
+
+***Summary***:
+
+**@Retryable Topic**: Marks the topic for retrying messages when an error occurs.
+**@Backoff**: Controls the delay between retry attempts (e.g., exponential backoff).
+**Dead Letter Topic (DLT)**: Holds messages that fail after multiple retries, allowing for further analysis.
+**@DltHandler**: Handles the messages that end up in the Dead Letter Topic, enabling manual intervention or logging.
+This setup is commonly used in distributed systems to ensure that temporary issues don’t cause data loss, and persistent errors are dealt with appropriately.
+The DLT handler allows you to take appropriate action when a message is found in the dead-letter queue, such as logging it, alerting an admin, or even trying to process it again (with additional logic).
+
+
+
+
    
 
 
