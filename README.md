@@ -106,6 +106,18 @@ This typically means that you want to mark a topic for retryable processing, mea
 This is used in scenarios where there could be temporary failures (e.g., network issues, service unavailability) that could be resolved after a short period, so it makes sense to retry rather than immediately sending the message to a dead-letter queue.
 
 
+**@Backoff**:  @Backoff is related to how retries are handled. It determines the delay between retries.
+For example, if a message fails to be processed, the system could wait a few seconds before retrying, then increase the delay with each failed attempt (e.g., exponential backoff).
+
+You might specify this like @Backoff(delay = 2000), which would mean a 2-second delay before retrying the operation.
+You could use exponential backoff where the retry interval keeps growing. For example, retry 1 after 2 seconds, retry 2 after 4 seconds, retry 3 after 8 seconds, etc.
+
+**Real-life scenario for @Retryable and @Backoff** : 
+Imagine you have a microservice that processes payments, and sometimes the payment gateway may temporarily be down. Instead of failing the entire transaction, you could use a @Retryable annotation to retry the request, and @Backoff can control how long the system should wait before trying again (e.g., retrying every 2 seconds, then 4 seconds, then 8 seconds).
+
+If after several retries the payment system is still unavailable, you might send the message to a dead-letter queue (more on that below).
+
+
 ## Setting Up Kafka with Docker
 
 Follow these steps to set up Kafka and Zookeeper using Docker:
