@@ -117,6 +117,22 @@ Imagine you have a microservice that processes payments, and sometimes the payme
 
 If after several retries the payment system is still unavailable, you might send the message to a dead-letter queue (more on that below).
 
+**Dead Letter Topic (DLT)**:
+A Dead Letter Topic (DLT) is used to store messages that cannot be processed successfully after a defined number of retry attempts. This could happen for several reasons:
+
+The message is malformed.
+The system cannot process the message due to a permanent failure (e.g., invalid data).
+The message cannot be delivered to a service due to service unavailability.
+In your messaging system, if a message fails too many times (after all retries), it will be moved to the DLT for further investigation or manual intervention. The goal is to preserve these messages instead of losing them entirely.
+
+**Real-life scenario for DLT** :
+Let's say your e-commerce application processes orders, but due to a system bug or bad data, an order cannot be processed (e.g., missing required fields, invalid credit card info). Instead of discarding the order, the system can move the message to a Dead Letter Topic. A team can later analyze the messages in the DLT to understand why they failed and fix the issues.
+
+**@DltHandler (Dead Letter Topic Handler)** : 
+The @DltHandler annotation typically refers to a method or handler function that is responsible for processing messages that have been moved to the Dead Letter Topic (DLT).
+
+The DLT handler allows you to take appropriate action when a message is found in the dead-letter queue, such as logging it, alerting an admin, or even trying to process it again (with additional logic).
+
 
 ## Setting Up Kafka with Docker
 
