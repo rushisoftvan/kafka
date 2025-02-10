@@ -139,6 +139,27 @@ After multiple retries, an order fails due to invalid data (e.g., wrong format o
 
 An admin can then investigate the DLT through a DLT handler. Maybe the system can log the failed message for review or send an alert to a support team to manually fix the issue.
 
+**How it works**:
+Initial processing attempt: A consumer attempts to process a message from a topic.
+
+Retry logic: If the message fails, the system retries according to the specified backoff strategy (e.g., retry every 2, 4, 8 seconds).
+
+Dead Letter Topic: If the message still fails after the maximum retry attempts, it’s sent to the Dead Letter Topic.
+
+@DltHandler: A handler is set up to process the messages in the DLT. For example, the handler could notify an administrator or log the message for further inspection.
+
+**Complete Example Flow**:
+A message is sent to a topic in a messaging system (e.g., Kafka).
+The system attempts to process the message.
+   If it fails, it will retry with exponential backoff (e.g., retry after 2 seconds, 4 seconds, etc.).
+   If retries exceed a threshold (say, 3 retries), the message is sent to the Dead Letter Topic.
+   
+A @DltHandler processes messages in the DLT. This handler could:
+Log the error message.
+Notify an administrator or customer support.
+Try to resolve the issue (like sending an alert about malformed data) or store the failed message for later investigation.   
+   
+
 
 
 
