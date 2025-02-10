@@ -97,6 +97,15 @@ acks=all: All replicas of the partition must acknowledge the message.
 
 **Rentaion** : Retention refers to the time duration that Kafka retains messages in a topic. Once a message has been retained for the specified duration or the topic reaches the configured size, Kafka will delete older messages. Retention is configured on a per-topic basis.
 
+
+**@Retryable Topic and @Backoff** : In many messaging systems (e.g., Apache Kafka, Spring Kafka, or other event-driven architectures), retry mechanisms are often needed to handle errors or transient issues. When a consumer tries to process a message and fails, it may need to retry processing the message a certain number of times before giving up.
+
+**@Retryable Topic** :
+This typically means that you want to mark a topic for retryable processing, meaning if an error occurs while consuming the message, the system should retry consuming it before giving up or routing it to a dead letter topic.
+
+This is used in scenarios where there could be temporary failures (e.g., network issues, service unavailability) that could be resolved after a short period, so it makes sense to retry rather than immediately sending the message to a dead-letter queue.
+
+
 ## Setting Up Kafka with Docker
 
 Follow these steps to set up Kafka and Zookeeper using Docker:
