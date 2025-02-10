@@ -133,6 +133,15 @@ The @DltHandler annotation typically refers to a method or handler function that
 
 The DLT handler allows you to take appropriate action when a message is found in the dead-letter queue, such as logging it, alerting an admin, or even trying to process it again (with additional logic).
 
+**Real-life scenario for @DltHandler**:
+
+After multiple retries, an order fails due to invalid data (e.g., wrong format of a shipping address). The message is sent to the DLT.
+
+An admin can then investigate the DLT through a DLT handler. Maybe the system can log the failed message for review or send an alert to a support team to manually fix the issue.
+
+
+
+
 
 ## Setting Up Kafka with Docker
 
