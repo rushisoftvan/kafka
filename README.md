@@ -204,7 +204,7 @@ Follow these steps to set up Kafka and Zookeeper using Docker:
     ```
 3. **List topics**:
     ```bash
-    kafka-topics.sh --list --bootstrap-server localhost:9092
+    docker exec kafka-container kafka-topics --list --bootstrap-server localhost:9092
     ```
 4. **Produce messages to the topic**:
     ```bash
