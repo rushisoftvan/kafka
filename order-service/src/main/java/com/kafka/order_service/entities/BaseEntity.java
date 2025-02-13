@@ -20,10 +20,10 @@ public abstract class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="created_on")
+    @Column(name="created_date")
     private Instant createdDate;
 
-    @Column(name="updated_on")
+    @Column(name="updated_date")
     private Instant updatedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,8 +39,8 @@ public abstract class BaseEntity implements Serializable {
         this.createdDate = Instant.now();
         this.updatedDate = Instant.now();
         this.createdBy = new UserEntity(1L);
+        this.updatedBy = new UserEntity(1L);
     }
-
     public BaseEntity(Long id){
         this.id =id;
     }

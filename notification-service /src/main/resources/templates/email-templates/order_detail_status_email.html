@@ -1,0 +1,49 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>>Order Details and Status Update</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
+    <style type="text/css">
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Order Details and Status Update</h1>
+
+<p>
+    Hello, <span th:text="${username}"></span>
+</p>
+
+<p>
+    I am writing to provide you with the details and current status of your order with us. Please find the information below
+</p>
+
+<p>
+    Order Id : <b><span th:text="${orderId}"></span></b>
+</p>
+
+<p>
+    Order Name : <b><span th:text="${orderName}"></span></b>
+</p>
+
+
+<p>
+    Order Status : <b><span th:text="${orderStatus}"></span></b>
+</p>
+
+<p style="color:blue">You can check your Order current status on Zepto portal using order Id</p>
+
+<p>
+    Thanks & Regards,<br>
+    Zepto Team
+</p>
+
+</body>
+</html>

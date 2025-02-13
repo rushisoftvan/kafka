@@ -3,10 +3,7 @@ package com.kafka.order_service.entities;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.kafka.order_service.enums.OrderStatusEnum;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -16,6 +13,7 @@ import java.math.BigDecimal;
 @Table(name = "orders")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class OrderEntity extends BaseEntity {
 
 
